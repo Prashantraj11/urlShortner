@@ -1,0 +1,25 @@
+{
+  "name": "urlshortner",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Prashantraj11/urlShortner#readme",
+  "bugs": {
+    "url": "https://github.com/Prashantraj11/urlShortner/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Prashantraj11/urlShortner.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "mongoose": "^9.1.4"
+  }
+}
