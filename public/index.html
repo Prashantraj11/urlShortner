@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium URL Shortener</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Boxicons for premium icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+    <div class="background-elements">
+        <div class="glow-orb orb-3"></div>
+    </div>
+
+    <main class="container">
+        
+        <header class="header">
+            <h1>TrimURL</h1>
+            <p>Shorten, share, and track your links with style.</p>
+        </header>
+
+        <section class="glass-panel main-panel">
+            <form id="shorten-form" class="form-container">
+                <div class="input-group">
+                    <label for="long-url">Original URL</label>
+                    <div class="input-wrapper">
+                        <i class='bx bx-globe'></i>
+                        <input type="url" id="long-url" placeholder="https://your-long-url.com" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="custom-alias">Custom Alias <span class="badge">Optional</span></label>
+                    <div class="input-wrapper">
+                        <i class='bx bx-edit-alt'></i>
+                        <input type="text" id="custom-alias" placeholder="e.g. my-awesome-link">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary" id="submit-btn">
+                    <span>Shorten URL</span>
+                    <i class='bx bx-right-arrow-alt'></i>
+                </button>
+            </form>
+
+            <div id="result-container" class="result-container hidden">
+                <p class="success-msg"><i class='bx bx-check-circle'></i> URL successfully shortened!</p>
+                <div class="short-url-box">
+                    <a href="#" id="short-url-link" target="_blank">http://localhost:8000/alias</a>
+                    <button class="btn-icon" id="copy-btn" title="Copy to clipboard">
+                        <i class='bx bx-copy'></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div id="error-message" class="error-msg hidden">
+                <i class='bx bx-error-circle'></i> <span id="error-text">An error occurred</span>
+            </div>
+        </section>
+
+        <!-- Analytics Section -->
+        <section class="glass-panel analytics-panel">
+            <h2><i class='bx bx-bar-chart-alt-2'></i> Check Link Analytics</h2>
+            <form id="analytics-form" class="form-container horizontal-form">
+                <div class="input-wrapper">
+                    <i class='bx bx-search'></i>
+                    <input type="text" id="analytics-alias" placeholder="Enter short ID or alias" required>
+                </div>
+                <button type="submit" class="btn-secondary">Check</button>
+            </form>
+
+            <div id="analytics-result" class="analytics-stats hidden">
+                <div class="stat-card">
+                    <h3>Total Clicks</h3>
+                    <p id="total-clicks" class="stat-number">0</p>
+                </div>
+                <div class="stat-card details-card">
+                    <h3>Last Visited</h3>
+                    <p id="last-visited" class="stat-text">Never</p>
+                </div>
+            </div>
+            <div id="analytics-error" class="error-msg hidden">
+                 <i class='bx bx-error-circle'></i> <span id="analytics-error-text">Not found</span>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
