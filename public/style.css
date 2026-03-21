@@ -1,7 +1,3 @@
-/* ==========================================================================
-   Liquid Glass & Green/Black URL Shortener - CSS
-   ========================================================================== */
-
 :root {
     --bg-color: #000000;
     --dark-green: #011409;
@@ -13,7 +9,7 @@
     --text-primary: #ffffff;
     --text-secondary: #a1b0a8;
     
-    --glass-bg: rgba(5, 15, 10, 0.3); /* dark tinted glass */
+    --glass-bg: rgba(5, 15, 10, 0.3);
     --glass-border-light: rgba(255, 255, 255, 0.15);
     --glass-border-dark: rgba(255, 255, 255, 0.02);
     
@@ -42,7 +38,6 @@ body {
     padding: 2rem 1rem;
 }
 
-/* Background Animated Liquid Orbs */
 .background-elements {
     position: fixed;
     top: 0;
@@ -61,7 +56,6 @@ body {
     animation: morph 15s ease-in-out infinite alternate, float 25s infinite linear;
 }
 
-/* Dynamic Liquid Border Radius */
 @keyframes morph {
     0%   { border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%; }
     34%  { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
@@ -75,8 +69,6 @@ body {
     100% { transform: rotate(360deg) translate(0, 0) scale(1); }
 }
 
-
-
 .orb-3 {
     width: 400px;
     height: 400px;
@@ -87,7 +79,6 @@ body {
     animation-delay: -10s;
 }
 
-/* Main Container */
 .container {
     width: 100%;
     max-width: 560px;
@@ -97,7 +88,6 @@ body {
     z-index: 1;
 }
 
-/* Header */
 .header {
     text-align: center;
     margin-bottom: 1rem;
@@ -120,12 +110,10 @@ body {
     font-size: 1.1rem;
 }
 
-/* Liquid Glass Panels */
 .glass-panel {
     background: var(--glass-bg);
     backdrop-filter: blur(28px) saturate(160%);
     -webkit-backdrop-filter: blur(28px) saturate(160%);
-    /* Top and left borders lighter to simulate light reflection of a glass surface */
     border-top: 1px solid var(--glass-border-light);
     border-left: 1px solid var(--glass-border-light);
     border-right: 1px solid var(--glass-border-dark);
@@ -134,7 +122,7 @@ body {
     padding: 2rem;
     box-shadow: 
         0 30px 60px rgba(0, 0, 0, 0.8),
-        inset 0 0 10px rgba(23, 208, 126, 0.05); /* very soft inner green glow */
+        inset 0 0 10px rgba(23, 208, 126, 0.05);
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -155,7 +143,6 @@ body {
     color: var(--text-primary);
 }
 
-/* Form Styles */
 .form-container {
     display: flex;
     flex-direction: column;
@@ -213,7 +200,6 @@ input[type="text"] {
     width: 100%;
     background: rgba(0, 0, 0, 0.4);
     border: 1px solid rgba(23, 208, 126, 0.1);
-    /* Liquid input feel */
     border-radius: 16px;
     padding: 1.1rem 1rem 1.1rem 3rem;
     color: var(--text-primary);
@@ -240,7 +226,6 @@ input::placeholder {
     color: rgba(161, 176, 168, 0.4);
 }
 
-/* Buttons */
 .btn-primary, .btn-secondary {
     display: flex;
     align-items: center;
@@ -267,7 +252,6 @@ input::placeholder {
     box-shadow: 0 4px 15px rgba(23, 208, 126, 0.3);
 }
 
-/* Glossy highlight effect */
 .btn-primary::after {
     content: '';
     position: absolute;
@@ -323,7 +307,6 @@ input::placeholder {
     transform: scale(1.05);
 }
 
-/* Results & Feedback */
 .hidden {
     display: none !important;
 }
@@ -387,7 +370,6 @@ input::placeholder {
     backdrop-filter: blur(5px);
 }
 
-/* Analytics Stats */
 .analytics-stats {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -440,7 +422,6 @@ input::placeholder {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive */
 @media (max-width: 480px) {
     .horizontal-form {
         flex-direction: column;

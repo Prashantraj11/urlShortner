@@ -6,7 +6,6 @@ async function handleGenerateNewShortUrl(req, res) {
         return res.status(400).json({ error: 'URL is required' });
     }
     
-    // Support future custom aliases if provided in the body
     const customAlias = body.customAlias || null;
 
     try {

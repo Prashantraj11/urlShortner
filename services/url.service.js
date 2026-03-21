@@ -1,10 +1,12 @@
 const { nanoid } = require('nanoid');
-const URL = require('../models/url');
+const { Redis } = require('@upstash/redis');
+
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN,
+});
 
 class UrlService {
-    /**
-     * Generates a new short URL, accepting an optional custom alias.
-     */
     async generateShortUrl(redirectURL, customAlias = null) {
         if (!redirectURL) {
             throw new Error('redirectURL is required');
@@ -13,54 +15,46 @@ class UrlService {
         let shortId = customAlias;
 
         if (shortId) {
-            // Check if custom alias is already taken
-            const existingUrl = await URL.findOne({ shortId });
-            if (existingUrl) {
+            const exists = await redis.exists(`url:${shortId}`);
+            if (exists) {
                 throw new Error('Custom alias is already in use');
             }
         } else {
-            // Generate a random 8-character ID
             shortId = nanoid(8);
+            
+            while (await redis.exists(`url:${shortId}`)) {
+                shortId = nanoid(8);
+            }
         }
 
-        await URL.create({
-            shortId: shortId,
-            redirectURL: redirectURL,
-            visitHistory: [],
-        });
+        await redis.set(`url:${shortId}`, redirectURL);
 
         return shortId;
     }
 
-    /**
-     * Retrieves the original URL and pushes a new visit timestamp.
-     */
     async getUrlAndRecordVisit(shortId) {
-        const entry = await URL.findOneAndUpdate(
-            { shortId },
-            {
-                $push: {
-                    visitHistory: { timestamp: Date.now() },
-                },
-            },
-            { new: true }
-        );
+        const redirectURL = await redis.get(`url:${shortId}`);
+        
+        if (redirectURL) {
+            await redis.rpush(`visits:${shortId}`, Date.now().toString());
+        }
 
-        return entry ? entry.redirectURL : null;
+        return redirectURL;
     }
 
-    /**
-     * Retrieves analytics for a short URL.
-     */
     async getAnalytics(shortId) {
-        const result = await URL.findOne({ shortId });
-        if (!result) {
+        const exists = await redis.exists(`url:${shortId}`);
+        if (!exists) {
             throw new Error('URL not found');
         }
 
+        const visits = await redis.lrange(`visits:${shortId}`, 0, -1);
+        
+        const formattedAnalytics = (visits || []).map(ts => ({ timestamp: Number(ts) }));
+
         return {
-            totalClicks: result.visitHistory.length,
-            analytics: result.visitHistory,
+            totalClicks: formattedAnalytics.length,
+            analytics: formattedAnalytics,
         };
     }
 }

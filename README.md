@@ -11,7 +11,7 @@ A robust, "SOLID", production-ready URL shortener built with Node.js, Express, a
 
 ## Tech Stack
 - **Backend:** Node.js, Express.js
-- **Database:** MongoDB, Mongoose
+- **Database:** Redis (blazing fast key-value store)
 - **Utilities:** `nanoid` (for short ID generation), `dotenv` (for environment configuration)
 
 ## API Endpoints
@@ -68,14 +68,14 @@ A robust, "SOLID", production-ready URL shortener built with Node.js, Express, a
    Ensure you have a `.env` file in the root directory:
    ```env
    PORT=8000
-   MONGO_URI=mongodb://127.0.0.1:27017/urlshortener
+   UPSTASH_REDIS_REST_URL=https://skilled-bird-79832.upstash.io
+   UPSTASH_REDIS_REST_TOKEN=your_upstash_token
    ```
 
 4. **Start the application**
    ```bash
    npm start
    ```
-   *Make sure your MongoDB server is running locally on port 27017.*
 
 ## Future Roadmap
 - Develop a premium UI/Frontend for public usage.
